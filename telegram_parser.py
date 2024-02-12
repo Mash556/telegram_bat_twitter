@@ -101,7 +101,9 @@ def my_favorites(bearer_token):
         'Authorization': f'Bearer {bearer_token}'
     }
     response = requests.get(url, headers=headers)
-    if response.status_code == 200:
+    if isinstance(response.json(), str):
+        return None
+    elif response.status_code == 200:
         response = response.json()
         posts = []
         if response is not []:
